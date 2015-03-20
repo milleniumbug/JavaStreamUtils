@@ -85,21 +85,4 @@ public class StreamUtils {
             }
         });
     }
-
-    public static void main(String[] args) {
-        System.out.println(Arrays.equals(cycle(new int[]{1, 2, 3, 4, 5}).limit(8).toArray(), new int[]{1, 2, 3, 4, 5, 1, 2, 3}) ? "PASS" : "FAIL");
-        System.out.println(Arrays.equals(cycle(new int[]{1}).limit(3).toArray(), new int[]{1, 1, 1}) ? "PASS" : "FAIL");
-        System.out.println(Arrays.equals(cycle(new double[]{1, 2, 3, 4, 5}).limit(8).toArray(), new double[]{1, 2, 3, 4, 5, 1, 2, 3}) ? "PASS" : "FAIL");
-        System.out.println(Arrays.equals(cycle(new double[]{1}).limit(3).toArray(), new double[]{1, 1, 1}) ? "PASS" : "FAIL");
-        System.out.println(Arrays.equals(cycle(new double[]{1, 2, 3, 4, 5}).limit(8).toArray(), new double[]{1, 2, 3, 4, 5, 1, 2, 3}) ? "PASS" : "FAIL");
-        System.out.println(Arrays.equals(cycle(new double[]{1}).limit(3).toArray(), new double[]{1, 1, 1}) ? "PASS" : "FAIL");
-        try
-        {
-            cycle(new int[0]);
-            System.out.println("FAIL");
-        } catch(IllegalArgumentException ex)
-        {
-            System.out.println("PASS");
-        }
-    }
 }
