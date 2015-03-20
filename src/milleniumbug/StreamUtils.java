@@ -11,6 +11,21 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class StreamUtils {
+    public static IntStream concat(IntStream... streams)
+    {
+        return Arrays.stream(streams).reduce(IntStream::concat).orElse(IntStream.empty());
+    }
+    
+    public static DoubleStream concat(DoubleStream... streams)
+    {
+        return Arrays.stream(streams).reduce(DoubleStream::concat).orElse(DoubleStream.empty());
+    }
+    
+    public static <T> Stream<? extends T> concat(Stream<? extends T>... streams)
+    {
+        return Arrays.stream(streams).reduce(Stream::concat).orElse(Stream.empty());
+    }
+    
 
     public static IntStream iota() {
         return iota(1);

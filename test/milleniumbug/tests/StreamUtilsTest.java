@@ -32,6 +32,18 @@ public class StreamUtilsTest {
     @After
     public void tearDown() {
     }
+    
+    @Test
+    public void variadicConcat()
+    {
+        int[] actuals = StreamUtils.concat(
+                StreamUtils.iota(1).limit(3),
+                StreamUtils.iota(4).limit(3),
+                StreamUtils.iota(7).limit(3),
+                StreamUtils.iota(10).limit(3)).toArray();
+        int[] expected = { 1,2,3,4,5,6,7,8,9,10,11,12 };
+        assertArrayEquals(expected, actuals);
+    }
 
     @Test
     public void iotaBasic()
