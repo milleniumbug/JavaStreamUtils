@@ -48,19 +48,19 @@ public class StreamUtilsTest {
     @Test
     public void iotaBasic()
     {
-        assertArrayEquals(StreamUtils.iota().limit(10).toArray(), new int[]{1,2,3,4,5,6,7,8,9,10});
-        assertEquals(StreamUtils.iota().skip(400).findFirst().getAsInt(), 401);
+        assertArrayEquals(new int[]{1,2,3,4,5,6,7,8,9,10}, StreamUtils.iota().limit(10).toArray());
+        assertEquals(401, StreamUtils.iota().skip(400).findFirst().getAsInt());
     }
     
     @Test
     public void cycleBasic()
     {
-        assertArrayEquals(StreamUtils.cycle(new int[]{1, 2, 3, 4, 5}).limit(8).toArray(), new int[]{1, 2, 3, 4, 5, 1, 2, 3});
-        assertArrayEquals(StreamUtils.cycle(new int[]{1}).limit(3).toArray(), new int[]{1, 1, 1});
-        assertArrayEquals(StreamUtils.cycle(new double[]{1, 2, 3, 4, 5}).limit(8).toArray(), new double[]{1, 2, 3, 4, 5, 1, 2, 3}, 0);
-        assertArrayEquals(StreamUtils.cycle(new double[]{1}).limit(3).toArray(), new double[]{1, 1, 1}, 0);
-        assertArrayEquals(StreamUtils.cycle(new double[]{1, 2, 3, 4, 5}).limit(8).toArray(), new double[]{1, 2, 3, 4, 5, 1, 2, 3}, 0);
-        assertArrayEquals(StreamUtils.cycle(new double[]{1}).limit(3).toArray(), new double[]{1, 1, 1}, 0);
+        assertArrayEquals(new int[]{1, 2, 3, 4, 5, 1, 2, 3}, StreamUtils.cycle(new int[]{1, 2, 3, 4, 5}).limit(8).toArray());
+        assertArrayEquals(new int[]{1, 1, 1}, StreamUtils.cycle(new int[]{1}).limit(3).toArray());
+        assertArrayEquals(new double[]{1, 2, 3, 4, 5, 1, 2, 3}, StreamUtils.cycle(new double[]{1, 2, 3, 4, 5}).limit(8).toArray(), 0);
+        assertArrayEquals(new double[]{1, 1, 1}, StreamUtils.cycle(new double[]{1}).limit(3).toArray(), 0);
+        assertArrayEquals(new double[]{1, 2, 3, 4, 5, 1, 2, 3}, StreamUtils.cycle(new double[]{1, 2, 3, 4, 5}).limit(8).toArray(), 0);
+        assertArrayEquals(new double[]{1, 1, 1}, StreamUtils.cycle(new double[]{1}).limit(3).toArray(), 0);
     }
     
     @Test(expected=IllegalArgumentException.class)
