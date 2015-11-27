@@ -26,7 +26,7 @@ public class StreamUtils {
     }
 
     public static <T> Stream<T> concat(Stream<? extends T>... streams) {
-        return (Stream<T>)Arrays.stream(streams).reduce(Stream::concat).orElse(Stream.empty());
+        return (Stream<T>) Arrays.stream(streams).reduce(Stream::concat).orElse(Stream.empty());
     }
 
     public static IntStream iota() {
@@ -160,13 +160,12 @@ public class StreamUtils {
     public static <T, U> Stream<Pair<T, U>> zip(Stream<? extends T> left, Stream<? extends U> right) {
         return StreamSupport.stream(new ZipSpliterator<T, U>(left.spliterator(), right.spliterator()), false);
     }
-    
+
     public static <T, U, V> Stream<V> zipMap(Stream<? extends T> left, Stream<? extends U> right, BiFunction<? super T, ? super U, ? extends V> fun) {
         return zip(left, right).map(pair -> fun.apply(pair.first, pair.second));
     }
-    
-    public static <T> Stream<Pair<Long, T>> enumerate(Stream<? extends T> stream)
-    {
+
+    public static <T> Stream<Pair<Long, T>> enumerate(Stream<? extends T> stream) {
         return zip(iota(0).mapToLong(Long::valueOf).boxed(), stream);
     }
 }

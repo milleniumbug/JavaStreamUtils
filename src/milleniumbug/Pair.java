@@ -3,6 +3,7 @@ package milleniumbug;
 import java.util.Objects;
 
 public class Pair<T, U> {
+
     public final T first;
     public final U second;
 
@@ -50,6 +51,4 @@ public class Pair<T, U> {
         return "(" + first + "," + second + ')';
     }
 
-    
-    
 }
