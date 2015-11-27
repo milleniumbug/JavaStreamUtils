@@ -1,5 +1,10 @@
 package milleniumbug.tests;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import milleniumbug.*;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -67,5 +72,33 @@ public class StreamUtilsTest {
     public void cycleEmpty()
     {
         StreamUtils.cycle(new int[0]);
+    }
+    
+    @Test
+    public void zipBasic()
+    {
+        List<Pair<String, Integer>> expected = Arrays.asList(new Pair<>("asd", 4), new Pair<>("ghj", 5), new Pair<>("qwe", 6));
+        assertEquals(expected, StreamUtils.zip(Stream.of("asd", "ghj", "qwe"), Stream.of(4,5,6)).collect(Collectors.toList()));
+    }
+    
+    @Test
+    public void zipDifferingSizes()
+    {
+        List<Pair<String, Integer>> expected = Arrays.asList(new Pair<>("asd", 4), new Pair<>("ghj", 5), new Pair<>("qwe", 6));
+        assertEquals(expected, StreamUtils.zip(Stream.of("asd", "ghj", "qwe"), Stream.of(4,5,6,7,8,9,10)).collect(Collectors.toList()));
+    }
+    
+    @Test
+    public void zipOneEmpty()
+    {
+        List<Pair<String, Integer>> expected = Collections.emptyList();
+        assertEquals(expected, StreamUtils.zip(Stream.of("asd", "ghj", "qwe"), Stream.empty()).collect(Collectors.toList()));
+    }
+    
+    @Test
+    public void zipInfinite()
+    {
+        List<Pair<Integer, Integer>> expected = Arrays.asList(new Pair<>(1, 4), new Pair<>(1, 5), new Pair<>(1, 6), new Pair<>(1, 7));
+        assertEquals(expected, StreamUtils.zip(Stream.generate(()->1), StreamUtils.iota(4).boxed()).limit(4).collect(Collectors.toList()));
     }
 }
